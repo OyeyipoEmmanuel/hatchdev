@@ -7,7 +7,7 @@ function hash(key:string, size: number): number{
         hash += key.charCodeAt(i)
     }
 
-    return hash % size
+    return hash
 }
 
 export default hash
