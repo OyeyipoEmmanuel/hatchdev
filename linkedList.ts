@@ -102,4 +102,3 @@ node.delete(20)
 node.find(400)
 // node.append(40);
 node.print()
-    
