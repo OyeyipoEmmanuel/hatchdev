@@ -37,6 +37,27 @@ class LinkedList {
 
     this.head = newNode;
   }
+  insert(value: number, positionValue: number){
+    const newNode = new Nodez(value)
+
+    if(this.head?.value === positionValue){
+      newNode.next = this.head
+      this.head = newNode
+    }
+
+    let current = this.head
+    while(current?.next && current.next.value !== positionValue){
+      current = current.next
+    }
+
+    if(current?.next){
+      newNode.next = current.next.next
+      current.next.next = newNode
+    }
+    // newNode.next = current?.next
+
+
+  }
   delete(value: number) {
     if (this.head === null) return;
 
@@ -77,6 +98,12 @@ class LinkedList {
 
     
   }
+  // reverse(): Nodez{
+  //   if(this.head?.next === null){
+  //     return this.head
+  //   }
+  //   zd
+  // }
   print() {
     let current = this.head;
     let result = "";
@@ -90,15 +117,19 @@ class LinkedList {
 }
 
 const node = new LinkedList();
-node.append(30);
-node.append(40);
-node.append(50);
-node.append(60);
-node.append(20);
-node.prepend(10);
+node.append(20)
+node.append(40)
+node.append(60)
+node.append(80)
+node.append(100)
+node.prepend(10)
+node.insert(30, 20)
+node.insert(50, 40)
+node.insert(70, 60)
+node.insert(90, 80)
 
-node.delete(20)
+// node.delete(20)
 
-node.find(400)
+// node.find(400)
 // node.append(40);
 node.print()
