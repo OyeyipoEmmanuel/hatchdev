@@ -40,6 +40,67 @@ class DoublyLinkedList {
       newNode.prev = current;
     }
   }
+  traverseToIndex(index: number){
+    if(this.head && index === 0){
+      return this.head
+    }
+    let count = 0
+    let current = this.head
+
+    while (current?.next && count !== index){
+      current = current.next
+      count++
+    }
+    return current
+  }
+
+  insert(value: number, index: number){
+    const newNode = new Nodezz(value)
+
+    if(this.head?.value === index){
+      this.prepend(value)
+    }
+
+    const prevNodeToInsertAt = this.traverseToIndex(index)?.prev
+    const nodeAtIndex = this.traverseToIndex(index)
+    if(prevNodeToInsertAt && nodeAtIndex){
+      prevNodeToInsertAt!.next = newNode
+      prevNodeToInsertAt.next.next = nodeAtIndex
+      prevNodeToInsertAt.next.prev = prevNodeToInsertAt
+      nodeAtIndex.prev = prevNodeToInsertAt.next
+    }
+    
+
+  }
+
+
+  deleteNode(value: number){
+    if(this.head === null){
+      return;
+    }
+
+    if(this.head.value === value){
+      this.head = this.head.next
+      if(this.head){
+        this.head.prev = null
+      }
+      
+      return;
+    }
+
+    let current = this.head
+    while(current.next && current.next?.value !== value){
+      current = current.next
+    }
+
+    if(current.next){
+      current.next = current.next.next
+      if(current.next){
+        current.next.prev = current
+      }
+    }
+
+  }
   printForward() {
     let current = this.head;
     let result: string = "";
@@ -74,6 +135,9 @@ doublyNode.append(50);
 doublyNode.append(60);
 doublyNode.append(70);
 doublyNode.append(80);
+
+// doublyNode.deleteNode(30)
+doublyNode.insert(55, 3)
 
 doublyNode.printForward();
 doublyNode.printBackward();

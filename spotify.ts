@@ -1,3 +1,5 @@
+import hash from "./hashFunction";
+
 class SongNode {
   value: string | number;
   prev: SongNode | null;
@@ -117,18 +119,22 @@ class LinkedListt {
     console.log(value + " deleted");
   }
   private randomIndex(arrLength: number): number {
-    let randomIndex = Math.random() * arrLength - 1;
+    let randomIndex = Math.floor(Math.random() * arrLength - 1);
+
+    
 
     return randomIndex;
   }
-  shuffle(): string {
-    let arr: SongNode[] = [];
+  shuffle() {
+    let arr: (string | number)[] = [];
 
     let current = this.head;
     while (current && current.next !== null) {
-      arr.push(current);
+      arr.push(current.value);
       current = current.next;
     }
+
+    console.log(arr)
 
     let randomIndex: number = this.randomIndex(arr.length);
 
@@ -141,20 +147,33 @@ class LinkedListt {
       arr[randomIndex] = temp;
     }
 
+    console.log(arr)
+    
+
     let curr = this.head
-    while (curr?.next !== null) {
-      for (let i = 0; i < arr.length; i++) {
-        if (i == 0) {
-          this.head = arr[i];
+
+    while(curr && curr.next !== null){
+      for(let i = 0; i <arr.length; i++){
+        curr.value = arr[i]
+        if(curr?.next !== null){
+          curr = curr.next
         }
-        curr = arr[i]
-        curr = curr.next
       }
     }
-    return this.printForward()
-  }
 
-  
+
+    // let curr = this.head;
+    // while (curr?.next !== null) {
+    //   for (let i = 0; i < arr.length; i++) {
+    //     if (i == 0) {
+    //       this.head = arr[i];
+    //     }
+    //     curr = arr[i];
+    //     curr = curr.next;
+    //   }
+    // }
+    // return this.printForward();
+  }
 }
 
 const song = new LinkedListt();
@@ -165,7 +184,7 @@ song.addSong("7 years");
 song.addSong("Lonely");
 song.addSong("Blinded by the lights");
 song.addSong("Not like us");
-console.log(song.shuffle())
+song.shuffle()
 // song.deleteSong("Not like us");
 song.playNext();
 song.printBackward();

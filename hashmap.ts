@@ -21,7 +21,7 @@ class HashMap {
     this.Map = new Array(size).map(() => null);
   }
 
-  setValue(key: string, value: string | number) {
+  addValue(key: string, value: string | number) {
     const newNode = new NodeH(key, value);
     let index = HashKey(key, this.size);
     let node = this.Map[index];
@@ -58,11 +58,11 @@ class HashMap {
 }
 
 const newHashMap = new HashMap(100);
-newHashMap.setValue("Name", "Emmanuel");
-newHashMap.setValue("age", "Ben");
-newHashMap.setValue("class", "Wen");
-newHashMap.setValue("Width", "Cen");
-newHashMap.setValue("Height", "Qeu");
+newHashMap.addValue("Name", "Emmanuel");
+newHashMap.addValue("age", "Ben");
+newHashMap.addValue("class", "Wen");
+newHashMap.addValue("Width", "Cen");
+newHashMap.addValue("Height", "Qeu");
 console.log(newHashMap);
 
 newHashMap.getValueByKey("age");
