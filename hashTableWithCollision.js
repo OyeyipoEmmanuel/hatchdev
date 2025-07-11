@@ -31,6 +31,20 @@ class HashTableWithCollision {
         }
         current.next = newValue;
     }
+    find(value) {
+        var _a;
+        const index = hashFunction2(value, this.size);
+        if (((_a = this.hashTable[index]) === null || _a === void 0 ? void 0 : _a.value) === value) {
+            return `Found at index ${index}`;
+        }
+        let current = this.hashTable[index];
+        let step = 0;
+        while ((current === null || current === void 0 ? void 0 : current.next) && current.value !== value) {
+            current = current.next;
+            step++;
+        }
+        return `Found at index ${index} as a Linked list at position ${step}`;
+    }
 }
 const newNodez = new HashTableWithCollision();
 newNodez.add("Emma");
@@ -38,4 +52,8 @@ newNodez.add("Dan");
 newNodez.add("Ann");
 newNodez.add("Ned");
 newNodez.add("Moe");
+console.log(newNodez.find("Ann"));
+console.log(newNodez.find("Ned"));
+console.log(newNodez.find("Moe"));
+console.log(newNodez.find("jgflmf"));
 console.log(newNodez);

@@ -44,6 +44,23 @@ class HashTableWithCollision {
 
     current.next = newValue;
   }
+  find(value: string){
+    const index: number = hashFunction2(value, this.size)
+
+    if(this.hashTable[index]?.value === value){
+      return `Found at index ${index}`
+    }
+
+    let current = this.hashTable[index]
+    let step = 0
+    while(current?.next && current.value !== value){
+      current = current.next
+      step++
+    }
+
+    return `Found at index ${index} as a Linked list at position ${step}`
+  }
+  
 }
 
 const newNodez = new HashTableWithCollision();
@@ -53,4 +70,8 @@ newNodez.add("Dan");
 newNodez.add("Ann");  
 newNodez.add("Ned");  
 newNodez.add("Moe"); 
+console.log(newNodez.find("Ann"));
+console.log(newNodez.find("Ned"));
+console.log(newNodez.find("Moe"));
+console.log(newNodez.find("jgflmf"));
 console.log(newNodez);
